@@ -46,7 +46,7 @@ namespace WebAPIApplication
                 options.SingleApiVersion(new Swashbuckle.Swagger.Model.Info{
                     Version="v1",
                     Title="Juoksukalenteri",
-                    Description="Juoksukalenterin testiapu",
+                    Description="Juoksukalenterin testiAPI",
                     TermsOfService = "None"
                 });
             });

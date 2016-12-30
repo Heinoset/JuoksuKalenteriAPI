@@ -1,38 +1,20 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Net.Http;
-
-using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
-
 using Newtonsoft.Json;
 using WebAPIApplication.Models;
 
 namespace WebAPIApplication.Controllers
 {
+    /// <summary>
+    /// Controller for Juoksukalenteri API functions
+    /// </summary>
     [Route("api/[controller]")]    
     public class JuoksukalenteriController : Controller
     {
-        // // GET api/Juoksukalenteri
-        // [HttpGet]
-        // public IEnumerable<Tapahtuma> Get()
-        // {
-        //     HttpClient client = new HttpClient();
-        //     Uri serviceUrl = 
-        //     new Uri(@"http://www.juoksija-lehti.fi/Tapahtumat/Juoksukalenteri.aspx?&type=search&format=json&laji=kaikki&location=&matka=kaikki&culture=&start=28.12.2016&end=13.12.2017&q=");
-
-        //     HttpResponseMessage results = client.GetAsync(serviceUrl).Result;
-        //     string json = results.Content.ReadAsStringAsync().Result;
-
-        //     List<Tapahtuma> tapahtumaList = JsonConvert.DeserializeObject<List<Tapahtuma>>(json);
-        //     return tapahtumaList;
-        // }
-
-        // GET api/Juoksukalenteri
         [HttpGet]
-        public List<Tapahtuma> Get(string laji, string location, string matka, DateTime alku, DateTime loppu, string query)
+        public IEnumerable<Tapahtuma> Get(string laji, string location, string matka, DateTime alku, DateTime loppu, string query)
         {
             string alkuStr = string.Empty;
             string loppuStr = string.Empty;
@@ -64,7 +46,6 @@ namespace WebAPIApplication.Controllers
             return tapahtumaList;
         }
 
-        // GET api/Juoksukalenteri/5
         [HttpGet("{eventid}")]
         public string Get(int eventid)
         {
