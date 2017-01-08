@@ -30,8 +30,10 @@ namespace WebAPIApplication
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {            
-            services.AddMvc(); // Add framework services.
-            services.AddCors(); // Add cors support            
+            // Add framework services.
+            services.AddMvc(); 
+                        
+            // Add cors support       
             services.AddCors(options => 
             {
                 options.AddPolicy("CorsPolicy",
@@ -42,6 +44,7 @@ namespace WebAPIApplication
                 );
             });
 
+            // Add swaggerGen for JSON support
             services.AddSwaggerGen(options => {
                 options.SingleApiVersion(new Swashbuckle.Swagger.Model.Info{
                     Version="v1",
@@ -50,6 +53,12 @@ namespace WebAPIApplication
                     TermsOfService = "None"
                 });
             });
+
+            // Add services required for using options
+            services.AddOptions(); 
+            
+            // Register the IConfiguration instance which MyOptions binds against
+            services.Configure<JuoksukalenteriApiSettings>(options => Configuration.GetSection("JuoksukalenteriApiSettings").Bind(options));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

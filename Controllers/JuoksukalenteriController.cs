@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using WebAPIApplication.Models;
 
@@ -13,6 +14,13 @@ namespace WebAPIApplication.Controllers
     [Route("api/[controller]")]    
     public class JuoksukalenteriController : Controller
     {
+        private readonly JuoksukalenteriApiSettings _optionsAccessor;
+
+        public JuoksukalenteriController(IOptions<JuoksukalenteriApiSettings> optionsAccessor)
+        {
+            _optionsAccessor = optionsAccessor.Value;
+        }
+
         [HttpGet]
         public IEnumerable<Tapahtuma> Get(string laji, string location, string matka, DateTime alku, DateTime loppu, string query)
         {
@@ -28,7 +36,8 @@ namespace WebAPIApplication.Controllers
 
             HttpClient client = new HttpClient();
             Uri serviceUrl = 
-            new Uri(string.Format("http://www.juoksija-lehti.fi/Tapahtumat/Juoksukalenteri.aspx?&type=search&format=json&laji={0}&location={1}&matka={2}&culture=&start={3}&end={4}&q={5}",
+            new Uri(string.Format("{0}?&type=search&format=json&culture=&laji={1}&location={2}&matka={3}&start={4}&end={5}&q={6}",
+            _optionsAccessor.ApiUrl,
             laji,
             location,
             matka,

@@ -3,8 +3,8 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "https://localhost:1479/",
-      "sslPort": 0
+      "applicationUrl": "http://localhost:1479/",
+      "sslPort": "5001"
     }
   },
   "profiles": {
@@ -19,7 +19,7 @@
     "WebAPIApplication": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "https://localhost:5000/api/juoksukalenteri",
+      "launchUrl": "https://localhost:5001/api/juoksukalenteri",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
