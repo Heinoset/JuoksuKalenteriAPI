@@ -15,7 +15,7 @@ namespace WebAPIApplication
     {
         public static void Main(string[] args)
         {
-            var cert = new X509Certificate2("webapi.pfx", "P@ssword1");
+            //var cert = new X509Certificate2("webapi.pfx", "P@ssword1");
 
             var config = new ConfigurationBuilder()
                 .AddCommandLine(args)
@@ -25,10 +25,10 @@ namespace WebAPIApplication
             var host = new WebHostBuilder()
                 .UseConfiguration(config)
                 .UseKestrel(options => {
-                    options.UseHttps("webapi.pfx", "P@ssword1");
+                    //options.UseHttps("webapi.pfx", "P@ssword1");
                 })
                 .UseContentRoot(Directory.GetCurrentDirectory())
-                .UseUrls("http://*:5000", "https://*:5001")
+                //.UseUrls("http://*:5000", "https://*:5001")
                 .UseIISIntegration()
                 .UseStartup<Startup>()
                 .Build();
